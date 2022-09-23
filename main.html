@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Image2LaTeX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--    <link rel="stylesheet" href="/template/style.css">-->
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="ajaxupload.js"></script> -->
+
+<style>
+    body {
+    background-color: #131316;
+}
+
+.picture {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h1 {
+    justify-content: center;
+    align-items: center;
+    color: #03e9f4;
+    text-shadow: #2a959b;
+}
+
+.image-preview {
+    border-radius: 30px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-color: rgb(46, 49, 49);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    color: rgb(88 199 250 / 0%);
+    text-align: center;
+    padding-top: 30%;
+    
+    /* background-color: rgb(85, 90, 90); */
+
+}
+
+.image-preview1 {
+    background: #191c29;
+    /* width: var(--card-width); */
+    /* height: var(--card-height); */
+    padding: 3px;
+    position: relative;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    font-size: 1.5em;
+    color: rgb(88 199 250 / 0%);
+    cursor: pointer;
+    font-family: cursive;
+  }
+
+.image-preview:hover {
+    color: rgb(88 199 250 / 100%);
+    transition: color 1s;
+    font-family: cursive;
+    font-size: 20px;
+  }
+
+#preview {
+    width: 100%;
+    padding: auto;
+}
+
+.form-group {
+    color: #03e9f4;
+    font-family: cursive;
+
+}
+
+
+
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(46, 49, 49);
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 10px;
+  }
+  .file-upload-wrapper:after {
+    content: attr(data-text);
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgb(46, 49, 49);
+    padding: 10px 15px;
+    display: block;
+    width: calc(100% - 40px);
+    pointer-events: none;
+    z-index: 20;
+    height: 60px;
+    line-height: 40px;
+    color: rgb(88 199 250 / 100%);
+    border-radius: 5px 10px 10px 5px;
+    font-weight: 300;
+    border-radius: 10px;
+    
+  }
+  .file-upload-wrapper:before {
+    content: 'Выбрать файл';
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-block;
+    height: 60px;
+    background: rgb(88 199 250 / 100%);
+    color: rgb(46, 49, 49);
+    font-weight: 700;
+    z-index: 25;
+    font-size: 16px;
+    line-height: 60px;
+    padding: 0 15px;
+    text-transform: uppercase;
+    pointer-events: none;
+    border-radius: 0 5px 5px 0;
+  }
+  .helpforuploadwrapper:hover:before {
+    background: #00f2ff;
+  }
+  .helpforuploadwrapper2:hover:before {
+      
+  }
+  .file-upload-wrapper input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    
+    /* background-color: #fff; */
+  }
+
+  .helpforuploadwrapper:hover:after {
+    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+    transition: box-shadow 1s;
+  }
+  .helpforuploadwrapper2:hover:after {
+
+  }
+  
+  
+
+  
+  
+  #login-box {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding: 0px;
+    transform: translate(-50%, -50%);
+    /* background: rgba(0,0,0,.5); */
+    box-sizing: border-box;
+    /* box-shadow: 0 15px 25px rgba(0,0,0,.6); */
+    border-radius: 10px;
+    height: 20px;
+
+  }
+  
+  #login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+  }
+  
+  #login-box .user-box {
+    position: relative;
+  }
+  
+  #login-box .user-box input {
+    width: 100%;
+    padding: 0px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+  }
+  #login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 0px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  #login-box .user-box input:focus ~ label,
+  #login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+  }
+  
+  #login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 0px 0px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+  
+
+
+
+  .openthis a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 100px #03e9f4;
+  }
+
+  .closethis a:hover {
+
+  }
+
+  #login-box2 a:hover {
+    background: none;
+    color: #03e9f4;
+    border-radius: 5px;
+    box-shadow: none;
+  }
+  
+  #login-box a span {
+    position: absolute;
+    display: block;
+  }
+  
+  .openthis a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 1s linear infinite;
+  }
+  
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+  }
+  
+  .openthis a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #03e9f4);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+  }
+  
+  @keyframes btn-anim2 {
+    0% {
+      top: -100%;
+    }
+    50%,100% {
+      top: 100%;
+    }
+  }
+  
+  .openthis a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #03e9f4);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+  }
+  
+  @keyframes btn-anim3 {
+    0% {
+      right: -100%;
+    }
+    50%,100% {
+      right: 100%;
+    }
+  }
+  
+  .openthis a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #03e9f4);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+  }
+  
+  @keyframes btn-anim4 {
+    0% {
+      bottom: -100%;
+    }
+    50%,100% {
+      bottom: 100%;
+    }
+  }
+
+  .closethis a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff0000);
+    animation: btn-anim1 1s linear infinite;
+  }
+
+  .closethis a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #ff0000);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: .25s
+  }
+
+  .closethis a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #ff0000);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: .5s
+  }
+
+  .closethis a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #ff0000);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: .75s
+  }
+
+  
+  .custom {
+    /* margin-top: 100px; */
+    /* width: 100px; */
+    background: none;
+    margin: none;
+    padding: none;
+    /* size: max; */
+    /* color: #fff; */
+    /* background: 0; */
+    border-style: none;
+    height: 40px;
+    width: 300px;
+    position: relative;
+    font-size: 20px;
+  }
+  .custom2 {
+    /* margin-top: 100px; */
+    /* width: 100px; */
+    background: none;
+    margin: none;
+    padding: none;
+    /* size: max; */
+    /* color: #fff; */
+    /* background: 0; */
+    border-style: none;
+    height: 40px;
+    width: 300px;
+    position: relative;
+    font-size: 20px;
+    color: #ff0000;
+  }
+  .custom:hover {
+      color: #fff;
+      transition: .5s;
+  }
+
+
+  
+  .answer {
+    justify-content: center;
+    align-items: center;
+    color: #03e9f4;
+    text-shadow: #2a959b;
+    position: relative;
+    font-size: 40px;
+    text-align: center;
+    padding: 0;
+    margin-top: 5%;
+    /* display: table-cell; */
+}
+
+
+/*#item {
+    display: block;
+    position: relative;
+    margin-left: 50%;
+    margin-right: 50%;
+}*/
+/*
+.load-box {
+    width: 65px;
+    height: 65px;
+    display: block;
+    border-radius: 30px;
+    background-color: rgb(46, 49, 49);
+    padding-top: 30%;
+}
+*/
+#item {
+    justify-content: center;
+    align-items: center;
+    color: #03e9f4;
+    text-shadow: #2a959b;
+    position: relative;
+    font-size: 40px;
+    text-align: center;
+    padding: 0;
+    display: none;
+    margin-top: 8%;
+}
+
+
+
+.loader {
+	--color: white;
+	--size-mid: 6vmin;
+	--size-dot: 1.5vmin;
+	--size-bar: 0.4vmin;
+	--size-square: 3vmin;
+	
+	position: relative;    
+}
+
+.loader::before,
+.loader::after {
+	content: '';
+	box-sizing: border-box;
+	position: absolute;
+}
+
+.loader.--6::before {
+	width: var(--size-square);
+	height: var(--size-square);
+	background-color: var(--color);
+	top: calc(50% - var(--size-square));
+	left: calc(50% - var(--size-square));
+	animation: loader-6 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes loader-6 {
+	0%, 100% {
+		transform: none;
+	}
+	
+	25% {
+		transform: translateX(100%);
+	}
+	
+	50% {
+		transform: translateX(100%) translateY(100%);
+	}
+	
+	75% {
+		transform: translateY(100%);
+	}
+}
+
+/**
+	loader --7
+**/
+.loader.--7::before,
+.loader.--7::after {
+	width: var(--size-square);
+	height: var(--size-square);
+	background-color: var(--color);
+}
+
+.loader.--7::before {
+	top: calc(50% - var(--size-square));
+	left: calc(50% - var(--size-square));
+	animation: loader-6 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+.loader.--7::after {
+	top: 50%;
+	left: 50%;
+	animation: loader-7 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes loader-7 {
+	0%, 100% {
+		transform: none;
+	}
+	
+	25% {
+		transform: translateX(-100%);
+	}
+	
+	50% {
+		transform: translateX(-100%) translateY(-100%);
+	}
+	
+	75% {
+		transform: translateY(-100%);
+	}
+}
+</style>
+
+
+    <script>
+        
+$(document).ready(function () {
+    function readImage ( input ) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          // console.log(e.target.result);
+          // console.log($('#preview'));
+
+          console.log(input.files[0].name);
+          console.log(document.querySelector('.file-upload-wrapper'));
+
+          document.querySelector('.file-upload-wrapper').setAttribute('data-text', input.files[0].name);
+          
+
+            
+          // console.log("Опа ", e.target);
+
+          console.log(e.target.result);
+
+
+          img = editImage(e.target.result);
+ 
+
+        $('.image-preview').text('');
+
+          $('.image-preview').css('background-image', `url(${e.target.result})`)
+          console.log(img);
+
+        }
+
+        let parent = document.querySelector('.answer');
+        // console.log(parent);
+        let text = 'dsf';
+        // parent.innerHTML = "Вот здесь надо пытаться поправить";
+
+        reader.readAsDataURL(input.files[0]);
+      }
+      // print('Помогите');
+    }
+
+    let img = new Image ();
+    function editImage(ssilka) {
+      let img = new Image ();
+      img.src = ssilka;
+
+      console.log(img.src);
+      console.log(img);
+
+      console.log(img.width);
+      console.log(img.height);
+      if (img.width != 300){
+        var help = img.width;
+        img.width = 300;
+        img.height = img.height / (help / 300)
+      }
+      if (img.height > 200){
+        var help = img.height;
+        img.height = 200;
+        img.width = img.width / (help / 200);
+      }
+      return img;
+    }
+
+    function printMessage(destination, msg) {
+
+      $(destination).removeClass();
+
+      if (msg == 'success') {
+        $(destination).addClass('alert alert-success').text('Файл успешно загружен.');
+      }
+
+      if (msg == 'error') {
+        $(destination).addClass('alert alert-danger').text('Произошла ошибка при загрузке файла.');
+      }
+
+    }
+
+    $('#image').change(function(){
+      readImage(this);
+    });
+
+
+
+
+
+    $('#img').on('submit', (function(e) {
+        let isLoad = false
+        $('.answer').text('');
+        $('#item').css('display', 'block')
+
+
+        
+
+        /*
+        $('#login-box a:hover').css('background', 'none');
+        $('#login-box a:hover').css('color', '#03e9f4');
+        $('#login-box a:hover').css('box-shadow', 'none');
+        */
+        // $('#login-box a:hover').css('');
+        // $('#login-box').attr('style', '')
+        $("#login-box").addClass("closethis")
+        $("#login-box").removeClass("openthis")
+        $("#submit").addClass("custom2")
+        $("#submit").removeClass("custom")
+        $(".file-upload-wrapper").addClass("helpforuploadwrapper2")
+        $(".file-upload-wrapper").removeClass("helpforuploadwrapper")
+
+
+
+
+
+      e.preventDefault();
+      // print(e);
+      // console.log('Помогите');
+      if (isLoad) return
+      isLoad = true
+
+      $('#submit',).attr('disabled', '')
+
+
+      console.log("Жопочкаф")
+      console.log(e);
+
+      var formData = new FormData(document.getElementById('upload-image'), document.getElementById('img1'));
+      $('#image').attr('disabled', '')
+
+      printMessage(formData);
+
+    $.ajax({
+
+
+    type:'POST', // Тип запроса
+    url: 'http://127.0.0.1:8000/upload/', // Скрипт обработчика
+    data: formData, // Данные которые мы передаем
+    cache: false, // В запросах POST отключено по умолчанию, но перестрахуемся
+    contentType: false, // Тип кодирования данных мы задали в форме, это отключим
+    processData: false, // Отключаем, так как передаем файл
+
+    success: function(json) {
+      document.querySelector('.answer').innerHTML = json['image_result'];
+      isload = false;
+      $('#submit').removeAttr('disabled');
+      $('#image').removeAttr('disabled');
+
+      $('#item').css('display', 'none');
+
+      $("#login-box").addClass("openthis")
+        $("#login-box").removeClass("closethis")
+        $("#submit").addClass("custom")
+        $("#submit").removeClass("custom2")
+        $(".file-upload-wrapper").addClass("helpforuploadwrapper")
+        $(".file-upload-wrapper").removeClass("helpforuploadwrapper2")
+    }
+
+    });
+
+
+
+    }));
+
+  });
+
+
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="picture">
+                <h1>Згруженная картинка</h1>
+            </div>
+
+            <div class="image-preview">
+                Здесь должна быть картинка
+                <img id="preview" src="" alt="" height="" width="">
+            </div>
+
+            <form id="upload-image" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="image">Имя выбранной картинки:</label>
+
+
+
+                    
+                    <div class="file-upload-wrapper helpforuploadwrapper" data-text="Выберите файл для загрузки">
+                    <input type="file" name="image" id="image" class="help" onclick="post()">
+
+
+
+                    </div>
+                </div>
+
+
+                <!-- <button class="btn btn-default" onclick="result()">Отправить запрос</button> -->
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="login-box" class="openthis">
+    <form id="img">
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <form id="img1">
+            <input type="submit" class="custom" id="submit" data-text="Опа нихуя">
+        </form>
+        </a>
+    </form>
+</div>
+
+<div class="load-box">
+    <form class="answer" id="answer" enctype="multipart/form-data">
+
+    </form>
+    <div class="item" id="item">
+        <i class="loader --7"></i>
+    </div>
+</div>
+
+{{status}}
+<br>
+{{image_processed}}
+<br>
+{{image_result}}
+</body>
+</html>

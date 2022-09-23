@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Image2LaTeX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--    <link rel="stylesheet" href="/template/style.css">-->
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="ajaxupload.js"></script> -->
+
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="picture">
+                <h1>Згруженная картинка</h1>
+            </div>
+
+            <div class="image-preview">
+                Здесь должна быть картинка
+                <img id="preview" src="" alt="" height="" width="">
+            </div>
+
+            <form id="upload-image" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="image">Имя выбранной картинки:</label>
+
+
+
+                    
+                    <div class="file-upload-wrapper helpforuploadwrapper" data-text="Выберите файл для загрузки">
+                    <input type="file" name="image" id="image" class="help" onclick="post()">
+
+
+
+                    </div>
+                </div>
+
+
+                <!-- <button class="btn btn-default" onclick="result()">Отправить запрос</button> -->
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="login-box" class="openthis">
+    <form id="img">
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <form id="img1">
+            <input type="submit" class="custom" id="submit" data-text="Опа нихуя">
+        </form>
+        </a>
+    </form>
+</div>
+
+<div class="load-box">
+    <form class="answer" id="answer" enctype="multipart/form-data">
+
+    </form>
+    <div class="item" id="item">
+        <i class="loader --7"></i>
+    </div>
+</div>
+
+{{status}}
+<br>
+{{image_processed}}
+<br>
+{{image_result}}
+</body>
+</html>
